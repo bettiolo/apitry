@@ -2,3 +2,4 @@ node_modules
 azure.err
 *.publishsettings
 /*.idea/
+/npm-debug.log
