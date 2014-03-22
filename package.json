@@ -1,0 +1,27 @@
+{
+  "name": "oauth-console",
+  "version": "0.0.1",
+  "description": "OAuth Console",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {
+	  "azure-cli": "~0.7.5"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bettiolo/oauth-console.git"
+  },
+  "keywords": [
+    "OAuth"
+  ],
+  "author": "Marco Bettiolo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bettiolo/oauth-console/issues"
+  },
+  "homepage": "https://github.com/bettiolo/oauth-console"
+}
