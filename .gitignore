@@ -3,3 +3,4 @@ azure.err
 *.publishsettings
 /*.idea/
 /npm-debug.log
+/packer/packer-arch/
