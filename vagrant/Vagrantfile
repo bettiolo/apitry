@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+NODE_PORT = 8000
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "arch"
+  config.vm.network :forwarded_port, host: NODE_PORT, guest: NODE_PORT
+  config.vm.provision "shell", 
+    :path => "provision.sh",
+    :args => [ NODE_PORT.to_s ]
+end
