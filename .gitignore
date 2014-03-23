@@ -4,3 +4,4 @@ azure.err
 /*.idea/
 /npm-debug.log
 /packer/packer-arch/
+/vagrant/.vagrant
