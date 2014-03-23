@@ -6,3 +6,5 @@ echo "Taking vagrant up"
 vagrant up || { echo "Failed, aborting." >&2 ; exit 1; }
 echo "SSH into vagrant"
 vagrant ssh || { echo "Failed, aborting." >&2 ; exit 1; }
+echo "Destroying vagrant instance"
+vagrant destroy || { echo "Failed, aborting." >&2 ; exit 1; }
