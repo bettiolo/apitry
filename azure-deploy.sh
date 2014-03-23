@@ -5,14 +5,50 @@
 PUBLISHSETTINGS=`pwd`/${1}
 
 echo "Installing Azure command line tools"
-npm install azure-cli --global || { echo "Failed, aborting." >&2; exit 1; }
+# npm install azure-cli --global || { echo "Failed, aborting." >&2; exit 1; }
 
 echo "Importing Azure account credentials: ${PUBLISHSETTINGS}"
 azure account import ${PUBLISHSETTINGS} || { echo "Failed, aborting." >&2; exit 1; }
 
-CREATED=`date -u +"%Y-%m-%dT%H-%M-%SZ"`
+echo "Listing Azure sites"
+SITES=`azure site list` || { echo "Failed, aborting." >&2; exit 1; }
+
 SITE_PREFIX=oauth-console
-SITE_NAME=${SITE_PREFIX}-${CREATED}
+SITE_NAME_GREEN=${SITE_PREFIX}-GREEN
+SITE_NAME_BLUE=${SITE_PREFIX}-BLUE
+INSTANCES_RUNNING=0
+
+if echo "${SITES}" | grep -Eq "^data:\s+oauth-console-GREEN\s+.*Running"
+then
+	echo "GREEN instance running"
+	INSTANCES_RUNNING=$[${INSTANCES_RUNNING} + 1]
+else
+	echo "GREEN instance NOT running"
+	SITE_NAME=${SITE_NAME_GREEN}
+fi
+
+if echo "${SITES}" | grep -Eq "data:\s+${SITE_NAME_BLUE}\s+.*Running"
+then
+	echo "BLUE instance running"
+	INSTANCES_RUNNING=$[${INSTANCES_RUNNING} + 1]
+else
+	echo "BLUE instance NOT running"
+	SITE_NAME=${SITE_NAME_BLUE}
+fi
+
+if [ ${INSTANCES_RUNNING} -eq 0 ]
+then
+	echo "No instance running, default to GREEN"
+	SITE_NAME=${SITE_NAME_GREEN}
+fi
+
+if [ ${INSTANCES_RUNNING} -eq 2 ]
+then
+	echo "Too many instances running, at least one should not be running"
+	echo "Failed, aborting." >&2
+	exit 1
+fi
+
 echo "Creating Azure site: ${SITE_NAME}"
 azure site create --location "West Europe" --git ${SITE_NAME} || { echo "Failed, aborting." >&2; exit 1; }
 
@@ -23,7 +59,7 @@ azure site set --php-version off ${SITE_NAME} || { echo "Failed, aborting." >&2;
 # azure site set -w ${SITE_NAME} || { echo "Failed, aborting." >&2; exit 1; }
 
 echo "Getting Azure site data"
-SITE_DATA=`azure site show -d ${SITE_NAME}`
+SITE_DATA=`azure site show -d ${SITE_NAME}` || { echo "Failed, aborting." >&2; exit 1; }
 SITE_USERNAME=`echo "${SITE_DATA}" | grep -Eo "Config publishingUserName .+$" | cut -d " " -f 3`
 SITE_PASSWORD=`echo "${SITE_DATA}" | grep -Eo "Config publishingPassword .+$" | cut -d " " -f 3`
 
