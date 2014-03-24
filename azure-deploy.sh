@@ -128,7 +128,7 @@ echo "Changing 'azure' remote url to: $REMOTE_URL" | sed "s/$SITE_PASSWORD/[...]
 git remote set-url azure "$REMOTE_URL" || die
 
 echo "Pushing to 'azure' remote"
-git push azure master || die
+git push azure master | sed "s/$SITE_PASSWORD/[...]/g" || die
 
 echo "Deleting 'azure' remote"
 git remote remove azure || die
