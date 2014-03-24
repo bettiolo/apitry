@@ -18,7 +18,7 @@ fi
 
 if [ ! "${PUBLISHSETTINGS:0:1}" = "/" ]
 then
-	PUBLISHSETTINGS=`pwd`/$PUBLISHSETTINGS
+	PUBLISHSETTINGS=$(pwd)/$PUBLISHSETTINGS
 fi
 
 if command -v azure >/dev/null 2>&1
@@ -72,7 +72,7 @@ echo "Importing Azure account credentials: $PUBLISHSETTINGS"
 azure account import $PUBLISHSETTINGS || die
 
 echo "Listing Azure sites"
-SITES=`azure site list` || die
+SITES=$(azure site list) || die
 
 SITE_NAME_GREEN=$SITE_PREFIX-GREEN
 SITE_NAME_BLUE=$SITE_PREFIX-BLUE
@@ -141,14 +141,14 @@ azure site set --php-version off $SITE_NAME_NOT_RUNNING || die
 # azure site set -w $SITE_NAME_NOT_RUNNING || die
 
 echo "Getting Azure site data"
-SITE_DATA=`azure site show -d $SITE_NAME_NOT_RUNNING` || die
-SITE_USERNAME=`echo "$SITE_DATA" | grep -Eo "Config publishingUserName .+$" | cut -d " " -f 3`
-SITE_PASSWORD=`echo "$SITE_DATA" | grep -Eo "Config publishingPassword .+$" | cut -d " " -f 3`
+SITE_DATA=$(azure site show -d $SITE_NAME_NOT_RUNNING) || die
+SITE_USERNAME=$(echo "$SITE_DATA" | grep -Eo "Config publishingUserName .+$" | cut -d " " -f 3)
+SITE_PASSWORD=$(echo "$SITE_DATA" | grep -Eo "Config publishingPassword .+$" | cut -d " " -f 3)
 
 echo "Publishing Username: $SITE_USERNAME"
 echo "Publishing Password: ${SITE_PASSWORD:0:5}[...]"
 
-REMOTE_URL="https://$SITE_USERNAME:$SITE_PASSWORD@`git ls-remote --get-url azure | cut -d @ -f 2`"
+REMOTE_URL="https://$SITE_USERNAME:$SITE_PASSWORD@$(git ls-remote --get-url azure | cut -d @ -f 2)"
 echo "Changing 'azure' remote url to: $REMOTE_URL" | sed "s/$SITE_PASSWORD/[...]/g" 
 git remote set-url azure "$REMOTE_URL" || die
 
@@ -158,7 +158,7 @@ git push azure master || die
 AZURE_SITE_CREATE_FAILED=0
 
 echo "Listing Azure sites"
-SITES=`azure site list` || die
+SITES=$(azure site list) || die
 
 if echo "$SITES" | grep -Eq "data:\s+$SITE_NAME_RUNNING\s+.*Running"
 then
