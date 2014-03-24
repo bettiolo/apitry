@@ -1,19 +1,53 @@
 #!/bin/bash
 
-[ "$#" -eq 1 ] || { echo "Usage: ${0} <path-to-publishsettings>" >&2; exit 1; }
+HELP="Usage: ${0} [-f] <path-to-publishsettings>"
+HAS_AZURE_CLI=0
+FORCE=0
+SITE_PREFIX=oauth-console
 
-PUBLISHSETTINGS=`pwd`/${1}
+[ "$#" -ge 1 ] || { echo $HELP >&2; exit 1; }
+if [ "$1" = "-f" ]
+then
+	FORCE=1
+	PUBLISHSETTINGS=`pwd`/$2
+else
+	PUBLISHSETTINGS=`pwd`/$1
+fi
 
-echo "Installing Azure command line tools"
-# npm install azure-cli --global || { echo "Failed, aborting." >&2; exit 1; }
+if command -v azure >/dev/null 2>&1
+then
+	HAS_AZURE_CLI=1
+fi
+
+echo "Is azure-cli installed? $HAS_AZURE_CLI"
+
+die () {
+    local message=$1
+    [ -z "$message" ] && message="Failed, aborting..."
+    echo "${BASH_SOURCE[1]}: line ${BASH_LINENO[0]}: ${FUNCNAME[1]}: $message" >&2
+    if [ $HAS_AZURE_CLI -eq 1 ]
+   	then
+    	echo "Clearing imported Azure account"
+    	azure account clear
+    fi
+    exit 1
+}
+
+if [ $HAS_AZURE_CLI -eq 1 ]
+then
+	echo "Installing Azure command line tools"
+	npm install azure-cli --global || die
+else
+	echo "Installing Azure command line tools"
+	npm update azure-cli --global || die
+fi
 
 echo "Importing Azure account credentials: ${PUBLISHSETTINGS}"
-azure account import ${PUBLISHSETTINGS} || { echo "Failed, aborting." >&2; exit 1; }
+azure account import ${PUBLISHSETTINGS} || die
 
 echo "Listing Azure sites"
-SITES=`azure site list` || { echo "Failed, aborting." >&2; exit 1; }
+SITES=`azure site list` || die
 
-SITE_PREFIX=oauth-console
 SITE_NAME_GREEN=${SITE_PREFIX}-GREEN
 SITE_NAME_BLUE=${SITE_PREFIX}-BLUE
 INSTANCES_RUNNING=0
@@ -47,9 +81,15 @@ fi
 
 if [ ${INSTANCES_RUNNING} -eq 2 ]
 then
-	echo "Too many instances running, at least one should not be running"
-	echo "Failed, aborting." >&2
-	exit 1
+	if [ $FORCE -eq 1 ]
+	then
+		echo "Forcing deploy to GREEN"
+		SITE_NAME_NOT_RUNNING=${SITE_NAME_GREEN}
+		SITE_NAME_RUNNING=${SITE_NAME_BLUE}
+	else
+		echo "Too many instances running, at least one should not be running"
+		die
+	fi
 fi
 
 echo "Instance running: ${SITE_NAME_RUNNING}"
@@ -58,47 +98,47 @@ echo "Instance NOT running: ${SITE_NAME_NOT_RUNNING}"
 if echo "${SITES}" | grep -Eq "data:\s+${SITE_NAME_NOT_RUNNING}\s+.*Stopped"
 then
 	echo "Deleting non running Azure site: ${SITE_NAME_NOT_RUNNING}"
-	azure site delete -q ${SITE_NAME_NOT_RUNNING} || { echo "Failed, aborting." >&2; exit 1; }
+	azure site delete -q ${SITE_NAME_NOT_RUNNING} || die
 fi
 
 echo "Creating Azure site: ${SITE_NAME_NOT_RUNNING}"
-azure site create --location "West Europe" --git ${SITE_NAME_NOT_RUNNING} || { echo "Failed, aborting." >&2; exit 1; }
+azure site create --location "West Europe" --git ${SITE_NAME_NOT_RUNNING} || die
 
 echo "Disabling PHP"
-azure site set --php-version off ${SITE_NAME_NOT_RUNNING} || { echo "Failed, aborting." >&2; exit 1; }
+azure site set --php-version off ${SITE_NAME_NOT_RUNNING} || die
 
 # echo "Enabling Web Sockets"
-# azure site set -w ${SITE_NAME_NOT_RUNNING} || { echo "Failed, aborting." >&2; exit 1; }
+# azure site set -w ${SITE_NAME_NOT_RUNNING} || die
 
 echo "Getting Azure site data"
-SITE_DATA=`azure site show -d ${SITE_NAME_NOT_RUNNING}` || { echo "Failed, aborting." >&2; exit 1; }
+SITE_DATA=`azure site show -d ${SITE_NAME_NOT_RUNNING}` || die
 SITE_USERNAME=`echo "${SITE_DATA}" | grep -Eo "Config publishingUserName .+$" | cut -d " " -f 3`
 SITE_PASSWORD=`echo "${SITE_DATA}" | grep -Eo "Config publishingPassword .+$" | cut -d " " -f 3`
 
 echo "Publishing Username: ${SITE_USERNAME}"
-echo "Publishing Password: ${SITE_PASSWORD:0:10}[...]"
+echo "Publishing Password: ${SITE_PASSWORD:0:5}[...]"
 
 REMOTE_URL="https://${SITE_USERNAME}:${SITE_PASSWORD}@`git ls-remote --get-url azure | cut -d @ -f 2`"
-echo "Changing 'azure' remote url to: ${REMOTE_URL}"
-git remote set-url azure "${REMOTE_URL}" | sed "s/${SITE_PASSWORD}/PASS/g" || { echo "Failed, aborting." >&2; exit 1; }
+echo "Changing 'azure' remote url to: ${REMOTE_URL}" | sed "s/${SITE_PASSWORD}/[...]/g" 
+git remote set-url azure "${REMOTE_URL}" || die
 
 echo "Pushing to 'azure' remote"
-git push azure master | sed "s/${SITE_PASSWORD}/PASS/g" || { echo "Failed, aborting." >&2; exit 1; }
+git push azure master || die
 
 echo "Deleting 'azure' remote"
-git remote remove azure | sed "s/${SITE_PASSWORD}/PASS/g" || { echo "Failed, aborting." >&2; exit 1; }
+git remote remove azure || die
 
 echo "Listing Azure sites"
-SITES=`azure site list` || { echo "Failed, aborting." >&2; exit 1; }
+SITES=`azure site list` || die
 
 if echo "${SITES}" | grep -Eq "data:\s+${SITE_NAME_RUNNING}\s+.*Running"
 then
 	echo "Stopping old running Azure site: ${SITE_NAME_RUNNING}"
-	azure site stop ${SITE_NAME_RUNNING} || { echo "Failed, aborting." >&2; exit 1; }
+	azure site stop ${SITE_NAME_RUNNING} || die
 fi
 
 echo "Clearing imported Azure account"
-azure account clear || { echo "Failed, aborting." >&2; exit 1; }
+azure account clear || die
 
 # echo "Deleting Azure account credentials"
-# rm ${PUBLISHSETTINGS} || { echo "Failed, aborting." >&2; exit 1; }
+# rm ${PUBLISHSETTINGS} || die
