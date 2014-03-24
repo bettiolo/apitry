@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 [ "$#" -eq 1 ] || { echo "Usage: ${0} <path-to-publishsettings>" >&2; exit 1; }
 
