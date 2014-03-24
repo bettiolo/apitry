@@ -9,9 +9,14 @@ SITE_PREFIX=oauth-console
 if [ "$1" = "-f" ]
 then
 	FORCE=1
-	PUBLISHSETTINGS=`pwd`/$2
+	PUBLISHSETTINGS=$2
 else
-	PUBLISHSETTINGS=`pwd`/$1
+	PUBLISHSETTINGS=$1
+fi
+
+if [ ! "${PUBLISHSETTINGS:0:1}" = "/" ]
+then
+	PUBLISHSETTINGS=`pwd`/$PUBLISHSETTINGS
 fi
 
 if command -v azure >/dev/null 2>&1
@@ -36,7 +41,7 @@ then
 	echo "Installing Azure command line tools"
 	npm install azure-cli --global || die
 else
-	echo "Installing Azure command line tools"
+	echo "Updating Azure command line tools"
 	npm update azure-cli --global || die
 fi
 
