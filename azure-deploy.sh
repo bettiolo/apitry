@@ -1,9 +1,10 @@
 #!/bin/bash
 
-HELP="Usage: $0 [-f] <path-to-publishsettings>"
-AZURE_CLI_PRESENT=0
-FORCE=0
 SITE_PREFIX=oauth-console
+HELP="Usage: $0 [-f] <path-to-publishsettings>"
+FORCE=0
+AZURE_CLI_PRESENT=0
+AZURE_REMOTE_ADDED=0
 
 [ "$#" -ge 1 ] || { echo $HELP >&2; exit 1; }
 if [ "$1" = "-f" ]
@@ -24,15 +25,24 @@ then
 	AZURE_CLI_PRESENT=1
 fi
 
-die () {
-    local message=$1
-    [ -z "$message" ] && message="Failed, aborting..."
-    echo "${BASH_SOURCE[1]}: line ${BASH_LINENO[0]}: ${FUNCNAME[1]}: $message" >&2
+cleanup () {
     if [ $AZURE_CLI_PRESENT -eq 1 ]
    	then
     	echo "Clearing imported Azure account"
     	azure account clear
     fi
+    if [ $AZURE_REMOTE_ADDED -eq 1 ]
+   	then
+   		echo "Removing 'azure' remote"
+		git remote remove azure
+	fi
+}
+
+die () {
+    local message=$1
+    [ -z "$message" ] && message="Failed, aborting..."
+    echo "${BASH_SOURCE[1]}: line ${BASH_LINENO[0]}: ${FUNCNAME[1]}: $message" >&2
+	cleanup
     exit 1
 }
 
@@ -109,6 +119,8 @@ fi
 echo "Creating Azure site: $SITE_NAME_NOT_RUNNING"
 azure site create --location "West Europe" --git $SITE_NAME_NOT_RUNNING || die
 
+AZURE_REMOTE_ADDED=1
+
 echo "Disabling PHP"
 azure site set --php-version off $SITE_NAME_NOT_RUNNING || die
 
@@ -128,10 +140,8 @@ echo "Changing 'azure' remote url to: $REMOTE_URL" | sed "s/$SITE_PASSWORD/[...]
 git remote set-url azure "$REMOTE_URL" || die
 
 echo "Pushing to 'azure' remote"
-git push azure master | sed "s/$SITE_PASSWORD/[...]/g" || die
-
-echo "Deleting 'azure' remote"
-git remote remove azure || die
+GIT_PUSH_OUTPUT=`git push azure master` || die
+echo "$GIT_PUSH_OUTPUT" | sed "s/$SITE_PASSWORD/[...]/g" 
 
 echo "Listing Azure sites"
 SITES=`azure site list` || die
@@ -142,8 +152,7 @@ then
 	azure site stop $SITE_NAME_RUNNING || die
 fi
 
-echo "Clearing imported Azure account"
-azure account clear || die
+cleanup
 
 # echo "Deleting Azure account credentials"
 # rm $PUBLISHSETTINGS || die
