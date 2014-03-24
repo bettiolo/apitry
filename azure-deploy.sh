@@ -5,6 +5,7 @@ HELP="Usage: $0 [-f] <path-to-publishsettings>"
 FORCE=0
 AZURE_CLI_PRESENT=0
 AZURE_REMOTE_ADDED=0
+AZURE_SITE_CREATE_FAILED=0
 
 [ "$#" -ge 1 ] || { echo $HELP >&2; exit 1; }
 if [ "$1" = "-f" ]
@@ -26,23 +27,33 @@ then
 fi
 
 cleanup () {
+	if [ $AZURE_SITE_CREATE_FAILED -eq 1 ]
+	then
+		echo "Deleting the Azure site that failed to create: $SITE_NAME_NOT_RUNNING"
+		azure site delete -q $SITE_NAME_NOT_RUNNING
+	fi
+
     if [ $AZURE_CLI_PRESENT -eq 1 ]
    	then
     	echo "Clearing imported Azure account"
     	azure account clear
     fi
+
     if [ $AZURE_REMOTE_ADDED -eq 1 ]
    	then
    		echo "Removing 'azure' remote"
 		git remote remove azure
 	fi
+
+	# echo "Deleting Azure account credentials"
+	# rm $PUBLISHSETTINGS || die
 }
 
 die () {
     local message=$1
     [ -z "$message" ] && message="Failed, aborting..."
     echo "${BASH_SOURCE[1]}: line ${BASH_LINENO[0]}: ${FUNCNAME[1]}: $message" >&2
-	cleanup
+    cleanup
     exit 1
 }
 
@@ -116,6 +127,8 @@ then
 	azure site delete -q $SITE_NAME_NOT_RUNNING || die
 fi
 
+AZURE_SITE_CREATE_FAILED=1
+
 echo "Creating Azure site: $SITE_NAME_NOT_RUNNING"
 azure site create --location "West Europe" --git $SITE_NAME_NOT_RUNNING || die
 
@@ -140,8 +153,9 @@ echo "Changing 'azure' remote url to: $REMOTE_URL" | sed "s/$SITE_PASSWORD/[...]
 git remote set-url azure "$REMOTE_URL" || die
 
 echo "Pushing to 'azure' remote"
-GIT_PUSH_OUTPUT=`git push azure master` || die
-echo "$GIT_PUSH_OUTPUT" | sed "s/$SITE_PASSWORD/[...]/g" 
+git push azure master || die
+
+AZURE_SITE_CREATE_FAILED=0
 
 echo "Listing Azure sites"
 SITES=`azure site list` || die
@@ -154,5 +168,4 @@ fi
 
 cleanup
 
-# echo "Deleting Azure account credentials"
-# rm $PUBLISHSETTINGS || die
+echo "Successfully deployed $SITE_NAME_NOT_RUNNING"
