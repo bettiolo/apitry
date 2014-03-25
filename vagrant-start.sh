@@ -1,10 +1,20 @@
 #!/bin/bash
 
+die () {
+    local message=$1
+    [ -z "$message" ] && message="Failed, aborting..."
+    echo "${BASH_SOURCE[1]}: line ${BASH_LINENO[0]}: ${FUNCNAME[1]}: $message" >&2
+    exit 1
+}
+
 echo "Changing to vagrant/"
-cd vagrant/ || { echo "Failed, aborting." >&2 ; exit 1; }
+cd vagrant/ || die
+
 echo "Taking vagrant up"
-vagrant up || { echo "Failed, aborting." >&2 ; exit 1; }
+vagrant up || die
+
 echo "SSH into vagrant"
-vagrant ssh || { echo "Failed, aborting." >&2 ; exit 1; }
+vagrant ssh || die
+
 echo "Destroying vagrant instance"
-vagrant destroy || { echo "Failed, aborting." >&2 ; exit 1; }
+vagrant destroy
