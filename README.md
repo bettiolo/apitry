@@ -22,7 +22,7 @@ rm 0.5.2_linux_amd64.zip
 ```
 
 ## Development Environment
-- `vagrant-create-update-box.sh` Creates a base Vagrant box using the Packer tool.
+- `vagrant-create-update-box.sh` Creates a base Vagrant ArchLinux box using Packer.
 - `vagrant-start.sh` Creates a new disposable database environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
 
 ## Deployment
