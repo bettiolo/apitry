@@ -9,11 +9,16 @@ oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?
 ### Ubuntu 12.10 64bit:
 ```sh
 sudo apt-get install virtualbox
-sudo apt-get install vagrant
+cd vagrant
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_x86_64.deb
+sudo dpkg -i vagrant_1.5.1_x86_64.deb
+rm vagrant_1.5.1_x86_64.deb
+cd ..
 mkdir packer
 cd packer
 wget https://dl.bintray.com/mitchellh/packer/0.5.2_linux_amd64.zip
 unzip 0.5.2_linux_amd64.zip
+rm 0.5.2_linux_amd64.zip
 ```
 
 ## Development Environment
