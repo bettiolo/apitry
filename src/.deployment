@@ -1,5 +1,3 @@
 [config]
 SCM_USE_SHALLOW_CLONE = 1
-POST_DEPLOYMENT_ACTION_DIR = ./
-POST_DEPLOYMENT_ACTION = npm test
 command = bash deploy.sh

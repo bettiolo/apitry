@@ -114,6 +114,8 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo "Installing npm packages"
   eval $NPM_CMD install --production
+  echo "Executing npm test"
+  eval $NPM_CMD test
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
