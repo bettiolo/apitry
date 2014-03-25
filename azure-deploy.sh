@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SITE_PREFIX=oauth-console
+SITE_PREFIX=oauthconsole
 HELP="Usage: $0 [-f] <path-to-publishsettings>"
 FORCE=0
 AZURE_CLI_PRESENT=0
@@ -78,7 +78,7 @@ SITE_NAME_GREEN=$SITE_PREFIX-GREEN
 SITE_NAME_BLUE=$SITE_PREFIX-BLUE
 INSTANCES_RUNNING=0
 
-if echo "$SITES" | grep -Eq "^data:\s+oauth-console-GREEN\s+.*Running"
+if echo "$SITES" | grep -Eq "^data:\s+$SITE_NAME_GREEN\s+.*Running"
 then
 	echo "GREEN instance running"
 	SITE_NAME_RUNNING=$SITE_NAME_GREEN
@@ -146,14 +146,15 @@ SITE_USERNAME=$(echo "$SITE_DATA" | grep -Eo "Config publishingUserName .+$" | c
 SITE_PASSWORD=$(echo "$SITE_DATA" | grep -Eo "Config publishingPassword .+$" | cut -d " " -f 3)
 
 echo "Publishing Username: $SITE_USERNAME"
-echo "Publishing Password: ${SITE_PASSWORD:0:5}[...]"
+echo "Publishing Password: [...]"
 
 REMOTE_URL="https://$SITE_USERNAME:$SITE_PASSWORD@$(git ls-remote --get-url azure | cut -d @ -f 2)"
 echo "Changing 'azure' remote url to: $REMOTE_URL" | sed "s/$SITE_PASSWORD/[...]/g" 
 git remote set-url azure "$REMOTE_URL" || die
 
 echo "Pushing to 'azure' remote"
-git push azure master || die
+GIT_PUSH_OUTPUT=$(git push azure master 2>&1) || die
+echo "$GIT_PUSH_OUTPUT" | sed "s/$SITE_PASSWORD/[...]/g"
 
 AZURE_SITE_CREATE_FAILED=0
 
