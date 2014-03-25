@@ -39,7 +39,12 @@ echo "Pulling packer-arch"
 git pull || die
 
 echo "Building virtualbox from arch-template.json"
-../packer build -force -only=virtualbox-iso arch-template.json || die
+$PACKER_CMD build -force -only=virtualbox-iso arch-template.json || die
 
-echo "Adding 'arch' vagrant box"
+echo "Adding 'arch' box to vagrant"
 vagrant box add arch packer_arch_virtualbox.box --force || die
+
+echo "Removing 'arch' packer file as vagrant has it's own copy"
+rm packer_arch_virtualbox.box  || die
+
+echo "There is still the downloaded installation iso inside the packer/packer-arch/packer_cache folder"
