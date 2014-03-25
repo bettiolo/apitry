@@ -3,14 +3,15 @@
   "version": "0.0.1",
   "description": "OAuth Console",
   "main": "server.js",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "grunt": "^0.4.4",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-concat": "^0.3.0"
   },
   "scripts": {
+    "postinstall": "grunt build",
+    "pretest": "grunt build",
     "test": "grunt test",
     "prestart": "grunt build",
     "start": "node src/server.js"
