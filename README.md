@@ -2,7 +2,7 @@ oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?
 =============
 
 ## Pre-requisites
-- VirtualBox: https://www.virtualbox.org
+- VirtualBox: http://www.virtualbox.org
 - Packer: http://www.packer.io
 - Vagrant: http://www.vagrantup.com
 
