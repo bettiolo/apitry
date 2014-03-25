@@ -112,6 +112,7 @@ selectNodeVersion
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+  echo "Installing npm packages"
   eval $NPM_CMD install --production
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
@@ -123,6 +124,7 @@ fi
 if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
   POST_DEPLOYMENT_ACTION=${POST_DEPLOYMENT_ACTION//\"}
   cd "${POST_DEPLOYMENT_ACTION_DIR%\\*}"
+  echo "Running post deployment action: $POST_DEPLOYMENT_ACTION_DIR/$POST_DEPLOYMENT_ACTION"
   "$POST_DEPLOYMENT_ACTION"
   exitWithMessageOnError "post deployment action failed"
 fi
