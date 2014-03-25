@@ -13,7 +13,7 @@
 # asyncCompletionThreadCount: 0
 # initialRequestBufferSize: 4096
 # maxRequestBufferSize: 65536
-# watchedFiles: *.js;iisnode.yml;node_modules\*
+watchedFiles: *.js;iisnode.yml;node_modules\*;build\*.js
 # uncFileChangesPollingInterval: 5000
 # gracefulShutdownTimeout: 60000
 # logDirectoryNameSuffix: logs
