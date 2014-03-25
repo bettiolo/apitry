@@ -10,7 +10,6 @@
     "grunt-contrib-concat": "^0.3.0"
   },
   "scripts": {
-    "postinstall": "grunt build",
     "pretest": "grunt build",
     "test": "grunt test",
     "prestart": "grunt build",
