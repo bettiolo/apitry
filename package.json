@@ -13,7 +13,7 @@
   "scripts": {
     "test": "grunt test",
     "prestart": "grunt build",
-    "start": "node server.js"
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
