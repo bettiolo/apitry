@@ -1,3 +1,2 @@
 [config]
-SCM_USE_SHALLOW_CLONE=1
-command = bash deploy.sh
+project = src/
