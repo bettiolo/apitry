@@ -5,7 +5,6 @@
   "main": "server.js",
   "dependencies": {},
   "devDependencies": {
-    "azure-cli": "~0.7.5",
     "grunt": "^0.4.4",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.5.0",
@@ -14,7 +13,7 @@
   "scripts": {
     "test": "grunt test",
     "prestart": "grunt build",
-    "start": "node src/server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +22,7 @@
   "keywords": [
     "OAuth"
   ],
-  "author": "Marco Bettiolo",
+  "author": "Marco Bettiolo <marco@bettiolo.it>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bettiolo/oauth-console/issues"
