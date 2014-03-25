@@ -1,4 +1,4 @@
 language: node_js
 node_js:
   - 0.10
-before_script: cd src && npm install --production
+before_install: cd src/
