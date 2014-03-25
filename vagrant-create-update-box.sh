@@ -48,3 +48,6 @@ echo "Removing 'arch' packer file as vagrant has it's own copy"
 rm packer_arch_virtualbox.box  || die
 
 echo "There is still the downloaded installation iso inside the packer/packer-arch/packer_cache folder"
+echo "You may want to manually clean that up."
+
+echo "Done."

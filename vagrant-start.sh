@@ -18,3 +18,5 @@ vagrant ssh || die
 
 echo "Destroying vagrant instance"
 vagrant destroy
+
+echo "Done."

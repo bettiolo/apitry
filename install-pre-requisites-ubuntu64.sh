@@ -39,3 +39,5 @@ unzip 0.5.2_linux_amd64.zip || die
 
 echo "Cleaning Up Packer installation files"
 rm 0.5.2_linux_amd64.zip || die
+
+echo "Done."
