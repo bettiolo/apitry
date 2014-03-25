@@ -1,4 +1,4 @@
-oauth-console
+oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?branch=master)](https://travis-ci.org/bettiolo/oauth-console)
 =============
 
 ## Pre-requisites
