@@ -1,22 +1,70 @@
 oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?branch=master)](https://travis-ci.org/bettiolo/oauth-console)
 =============
 
-## Pre-requisites
-- VirtualBox: http://www.virtualbox.org
-- Packer: http://www.packer.io
-- Vagrant: http://www.vagrantup.com
+# Development
 
-### Pre-requisites installation
+## How to contribute?
+
+Contributing is easy, just set-up your machine with the following development pre-requisites and then follow the steps to set-up the enviornment.
+
+### Pre-requisites
+
+- *Git:* http://git-scm.com
+- *NodeJs:* http://nodejs.org
+- *Npm:* https://www.npmjs.org
+
+#### Pre-requisites installation
+
+(coming soon)
+
+### Setting up the development enviornment
+
+First of all you need to fork the main repository, then:
+```bash
+git clone https://github.com/{YOUR_USERNAME}/oauth-console.git
+cd src
+npm install
+npm test
+```
+All the tests should be green and you can start hacking. 
+
+When you are finished, please run the tests on the disposable Integration environment.
+
+## How to run tests against the disposable Integration environment?
+
+### Pre-requisites
+
+- *VirtualBox:* http://www.virtualbox.org
+- *Packer:* http://www.packer.io
+- *Vagrant:* http://www.vagrantup.com
+
+#### Pre-requisites installation
+
 - `install-pre-requisites-ubuntu64.sh` Automatic install for Ubuntu 12.10 64bit
 
-## Development Environment
+If there is no automatic script for your configuration, please ensure you have all the pre-requisites installed.
+
+### Running the tests in the Integration environment
+
 - `vagrant-create-update-box.sh` Creates a base Vagrant ArchLinux box using Packer.
-- `vagrant-start.sh` Creates a new disposable database environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
+- `vagrant-start.sh` Creates a new disposable, non-persistent environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
+
+# How to deploy and test the code in Staging environment?
+
+(Not ready yet!)
+
+# How to deploy and test the code in Production environment?
 
 ## Deployment
+
 - `azure-deploy.sh` Blue/green deploy to a brand new cloud instance.
 
-## Development Workflow
+- - -
+
+# Development Workflow 
+
+(Not quite ready yet!)
+
 *Development environment:* Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to `master` branch.
 
 *Integration environment:* A virtual, disposable, non-persistent instance that is automatically created and destroyed via Vagrant. The source code is checked out from the `master` branch. Tests are run via the `grunt test` command. Unit, Integration, Acceptance and Smoke tests are executed.
