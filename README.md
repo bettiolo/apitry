@@ -15,7 +15,7 @@ Contributing is easy! Just set-up your machine with the pre-requisites and then 
 
 (coming soon)
 
-### Setting up the development enviornment
+### Setting up the Development enviornment
 
 First of all you need to fork the main repository, then:
 
@@ -30,7 +30,7 @@ All the tests should be green and you can start hacking.
 
 When you are happy with your changes, please run the tests on the disposable Integration environment.
 
-## How to test the Integration environment?
+## How to test in the Integration env.?
 
 ### Pre-requisites
 
@@ -46,7 +46,7 @@ If there is no automatic script for your configuration, please ensure you have a
 
 ### Running the tests in the Integration environment
 
-- `vagrant-create-update-box.sh` Creates a base Vagrant ArchLinux box using Packer.
+- `vagrant-create-update-box.sh` Creates a base Vagrant ArchLinux box using Packer. Run this only once or if you need to update the vagrant golden box.
 - `vagrant-start.sh` Creates a new disposable, non-persistent environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
 
 # How to deploy and test the Staging environment?
@@ -57,15 +57,13 @@ If there is no automatic script for your configuration, please ensure you have a
 
 ## Deployment
 
-- `azure-deploy.sh` Blue/green deploy to a brand new cloud instance.
-
-- - -
+- `azure-deploy.sh` Deploys to a brand new non-persistent disposable cloud instance following the Blue/Green deplyoment paradigm.
 
 # Development Workflow 
 
 (Not quite ready yet!)
 
-*Development environment:* Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to `master` branch.
+*Development environment:* Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to the `master` branch.
 
 *Integration environment:* A virtual, disposable, non-persistent instance that is automatically created and destroyed via Vagrant. The source code is checked out from the `master` branch. Tests are run via the `grunt test` command. Unit, Integration, Acceptance and Smoke tests are executed.
 
