@@ -30,7 +30,7 @@ All the tests should be green and you can start hacking.
 
 When you are happy with your changes, please run the tests on the disposable Integration environment.
 
-## How to test in the Integration env.?
+## How to deploy and test the Integration environment?
 
 ### Pre-requisites
 
