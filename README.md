@@ -40,14 +40,14 @@ When you are happy with your changes, please run the tests on the disposable Int
 
 #### Pre-requisites installation
 
-- `install-pre-requisites-ubuntu64.sh` Automatic install for Ubuntu 12.10 64bit
+- [install-pre-requisites-ubuntu64.sh](install-pre-requisites-ubuntu64.sh) Automatic install for Ubuntu 12.10 64bit
 
 If there is no automatic script for your configuration, please ensure you have all the pre-requisites installed.
 
 ### Running the tests in the Integration environment
 
-- `vagrant-create-update-box.sh` Creates a base Vagrant ArchLinux box using Packer. Run this only once or if you need to update the vagrant golden box.
-- `vagrant-start.sh` Creates a new disposable, non-persistent environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
+- [vagrant-create-update-box.sh](vagrant-create-update-box.sh) Creates a base Vagrant ArchLinux box using Packer. Run this only once or if you need to update the vagrant golden box.
+- [vagrant-start.sh](vagrant-start.sh) Creates a new disposable, non-persistent environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
 
 # How to deploy and test the Staging environment?
 
@@ -57,7 +57,7 @@ If there is no automatic script for your configuration, please ensure you have a
 
 ## Deployment
 
-- `azure-deploy.sh` Deploys to a brand new non-persistent disposable cloud instance following the Blue/Green deplyoment paradigm.
+- [azure-deploy.sh](azure-deploy.sh) Deploys to a brand new non-persistent disposable cloud instance following the Blue/Green deplyoment paradigm.
 
 # Development Workflow 
 
