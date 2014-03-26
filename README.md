@@ -13,7 +13,7 @@ Contributing is easy! Just set-up your machine with the pre-requisites and then 
 
 #### Pre-requisites installation
 
-(coming soon)
+*(coming soon)*
 
 ### Setting up the Development enviornment
 
@@ -51,7 +51,7 @@ If there is no automatic script for your configuration, please ensure you have a
 
 # How to deploy and test the Staging environment?
 
-(Not ready yet!)
+*(Not ready yet!)*
 
 # How to deploy and test the Production environment?
 
@@ -61,7 +61,7 @@ If there is no automatic script for your configuration, please ensure you have a
 
 # Development Workflow 
 
-(Not quite ready yet!)
+*(Not quite ready yet!)*
 
 **Development environment:** Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to the `master` branch.
 
