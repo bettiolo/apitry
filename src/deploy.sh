@@ -5,6 +5,8 @@
 # Version: 0.1.7
 # ----------------------
 
+echo "Custom deployment script"
+
 # Helpers
 # -------
 
