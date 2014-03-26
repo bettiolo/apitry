@@ -51,7 +51,7 @@ fi
 
 if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
   # Install kudu sync
-  echo Installing Kudu Sync
+  echo "Installing Kudu Sync"
   npm install kudusync -g --silent
   exitWithMessageOnError "npm failed"
 
@@ -98,7 +98,7 @@ selectNodeVersion () {
 # Deployment
 # ----------
 
-echo "Handling node.js deployment."
+echo "Handling remote node.js deployment."
 
 # 1. KuduSync
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
