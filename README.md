@@ -16,11 +16,11 @@ oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?
 ## Deployment
 - `azure-deploy.sh` Blue/green deploy to a brand new cloud instance.
 
-## Goals
-- Local development environment (build + unit, integration, acceptance and smoke tests)
-- Local virtual non-persistent system test instance (build + unit, integration, acceptance and smoke tests)
-- Cloud deployed non-persistent user acceptance test instances (build + unit, integration, acceptance and smoke tests)
-- Cloud deployed non-persistent production instances (build + smoke tests)
+## Development Workflow
+Development environment: Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to `master` branch.
 
-## Stretch Goal
-- Completely tested infrastructure
+Integration environment: A virtual, disposable, non-persistent environment that is automatically created and destroyed via Vagrant. The source code is checked out from the `master` branch. Tests are run via the `grunt test` command. Unit, Integration, Acceptance and Smoke tests are executed.
+
+Staging environment: A cloud based, disposable, non-persistent environment that gets continuously deployed to Windows Azure with the same script as Production. The source code is checked out from the `release` branch. Tests are automatically run via the `grunt test` command on deploy. Unit, Integration, Acceptance and Smoke tests are executed. Each time a new release gets deployed, a new instance is created and the old destroyed as in Blue/Green deployment.
+
+Staging environment: A cloud based, disposable, non-persistent environment that gets continuously deployed to Windows Azure with the same script as Staging. The source code is checked out from the latest tag. Tests are automatically run via the `grunt test` command on deploy. Only Smoke tests are executed. Each time a new release gets deployed, a new instance is created and the old destroyed as in Blue/Green deployment.
