@@ -3,7 +3,7 @@ oauth-console
 
 [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?branch=master)](https://travis-ci.org/bettiolo/oauth-console)
 
-# How to contribute?
+## How to contribute?
 
 Contributing is easy! Just set-up your machine with the pre-requisites and then follow the steps to set-up the development environment.
 
