@@ -1,7 +1,9 @@
-oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?branch=master)](https://travis-ci.org/bettiolo/oauth-console)
+oauth-console
 =============
 
-## How to contribute?
+[![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?branch=master)](https://travis-ci.org/bettiolo/oauth-console)
+
+# How to contribute?
 
 Contributing is easy! Just set-up your machine with the pre-requisites and then follow the steps to set-up the development environment.
 
@@ -49,17 +51,17 @@ If there is no automatic script for your configuration, please ensure you have a
 - [vagrant-create-update-box.sh](vagrant-create-update-box.sh) Creates a base Vagrant ArchLinux box using Packer. Run this only once or if you need to update the vagrant golden box.
 - [vagrant-start.sh](vagrant-start.sh) Creates a new disposable, non-persistent environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
 
-# How to deploy and test the Staging environment?
+## How to deploy and test the Staging environment?
 
 *(Not ready yet!)*
 
-# How to deploy and test the Production environment?
+## How to deploy and test the Production environment?
 
-## Deployment
+### Deployment
 
 - [azure-deploy.sh](azure-deploy.sh) Automatically deploys to a brand new non-persistent, disposable cloud instance following the Blue/Green deployment paradigm.
 
-# Development Workflow 
+## Development Workflow 
 
 *(Not quite ready yet!)*
 
