@@ -57,16 +57,16 @@ If there is no automatic script for your configuration, please ensure you have a
 
 ## Deployment
 
-- [azure-deploy.sh](azure-deploy.sh) Deploys to a brand new non-persistent disposable cloud instance following the Blue/Green deplyoment paradigm.
+- [azure-deploy.sh](azure-deploy.sh) Automatically deploys to a brand new non-persistent, disposable cloud instance following the Blue/Green deployment paradigm.
 
 # Development Workflow 
 
 (Not quite ready yet!)
 
-*Development environment:* Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to the `master` branch.
+**Development environment:** Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to the `master` branch.
 
-*Integration environment:* A virtual, disposable, non-persistent instance that is automatically created and destroyed via Vagrant. The source code is checked out from the `master` branch. Tests are run via the `grunt test` command. Unit, Integration, Acceptance and Smoke tests are executed.
+**Integration environment:** A virtual, disposable, non-persistent instance that is automatically created and destroyed via Vagrant. The source code is checked out from the `master` branch. Tests are run via the `grunt test` command. Unit, Integration, Acceptance and Smoke tests are executed.
 
-*Staging environment:* Cloud based, disposable, non-persistent instances that are continuously deployed to Windows Azure with the same script as Production. The source code is checked out from the `release` branch. Tests are automatically run via the `grunt test` command on deploy. Unit, Integration, Acceptance and Smoke tests are executed. Each time a new release gets deployed, a new instance is created and the old destroyed as in Blue/Green deployment.
+**Staging environment:** Cloud based, disposable, non-persistent instances that are continuously deployed to Windows Azure with the same script as Production. The source code is checked out from the `release` branch. Tests are automatically run via the `grunt test` command on deploy. Unit, Integration, Acceptance and Smoke tests are executed. Each time a new release gets deployed, a new instance is created and the old destroyed as in Blue/Green deployment.
 
-*Staging environment:* Cloud based, disposable, non-persistent instances that are continuously deployed to Windows Azure with the same script as Staging. The source code is checked out from the latest tag. Tests are automatically run via the `grunt test` command on deploy. Only Smoke tests are executed. Each time a new release gets deployed, a new instance is created and the old destroyed as in Blue/Green deployment.
+**Staging environment:** Cloud based, disposable, non-persistent instances that are continuously deployed to Windows Azure with the same script as Staging. The source code is checked out from the latest tag. Tests are automatically run via the `grunt test` command on deploy. Only Smoke tests are executed. Each time a new release gets deployed, a new instance is created and the old destroyed as in Blue/Green deployment.
