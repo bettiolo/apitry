@@ -1,8 +1,6 @@
 oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?branch=master)](https://travis-ci.org/bettiolo/oauth-console)
 =============
 
-# Development
-
 ## How to contribute?
 
 Contributing is easy! Just set-up your machine with the pre-requisites and then follow the steps to set-up the development environment.
@@ -32,7 +30,7 @@ All the tests should be green and you can start hacking.
 
 When you are happy with your changes, please run the tests on the disposable Integration environment.
 
-## How to run tests against the disposable Integration environment?
+## How to test the Integration environment?
 
 ### Pre-requisites
 
@@ -51,11 +49,11 @@ If there is no automatic script for your configuration, please ensure you have a
 - `vagrant-create-update-box.sh` Creates a base Vagrant ArchLinux box using Packer.
 - `vagrant-start.sh` Creates a new disposable, non-persistent environment. It deploys the application, takes you in via SSH ready to run then your tests or experiments. When you are finished, it destroys the environment.
 
-# How to deploy and test the code in Staging environment?
+# How to deploy and test the Staging environment?
 
 (Not ready yet!)
 
-# How to deploy and test the code in Production environment?
+# How to deploy and test the Production environment?
 
 ## Deployment
 
