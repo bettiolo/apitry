@@ -63,6 +63,8 @@ If there is no automatic script for your configuration, please ensure you have a
 
 *(Not quite ready yet!)*
 
+The aim is to have a completely scripted and automated development workflow.
+
 **Development environment:** Development is done on the local machine. Unit tests are continuously executed via `grunt watch` task. Integration, Acceptance and Smoke test executed on demand. The source code is pushed to the `master` branch.
 
 **Integration environment:** A virtual, disposable, non-persistent instance that is automatically created and destroyed via Vagrant. The source code is checked out from the `master` branch. Tests are run via the `grunt test` command. Unit, Integration, Acceptance and Smoke tests are executed.
