@@ -7,9 +7,9 @@ Contributing is easy! Just set-up your machine with the pre-requisites and then 
 
 ### Pre-requisites
 
-- *Git:* http://git-scm.com
-- *NodeJs:* http://nodejs.org
-- *Npm:* https://www.npmjs.org
+- [Git](http://git-scm.com)
+- [NodeJs](http://nodejs.org)
+- [Npm](https://www.npmjs.org)
 
 #### Pre-requisites installation
 
@@ -34,9 +34,9 @@ When you are happy with your changes, please run the tests on the disposable Int
 
 ### Pre-requisites
 
-- *VirtualBox:* http://www.virtualbox.org
-- *Packer:* http://www.packer.io
-- *Vagrant:* http://www.vagrantup.com
+- [VirtualBox](http://www.virtualbox.org)
+- [Packer](http://www.packer.io)
+- [Vagrant](http://www.vagrantup.com)
 
 #### Pre-requisites installation
 
