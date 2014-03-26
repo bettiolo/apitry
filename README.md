@@ -5,7 +5,7 @@ oauth-console [![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?
 
 ## How to contribute?
 
-Contributing is easy, just set-up your machine with the following development pre-requisites and then follow the steps to set-up the enviornment.
+Contributing is easy! Just set-up your machine with the pre-requisites and then follow the steps to set-up the development environment.
 
 ### Pre-requisites
 
@@ -20,15 +20,17 @@ Contributing is easy, just set-up your machine with the following development pr
 ### Setting up the development enviornment
 
 First of all you need to fork the main repository, then:
+
 ```bash
 git clone https://github.com/{YOUR_USERNAME}/oauth-console.git
 cd src
 npm install
 npm test
 ```
+
 All the tests should be green and you can start hacking. 
 
-When you are finished, please run the tests on the disposable Integration environment.
+When you are happy with your changes, please run the tests on the disposable Integration environment.
 
 ## How to run tests against the disposable Integration environment?
 
