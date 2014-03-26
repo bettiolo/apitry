@@ -17,6 +17,8 @@ Contributing is easy! Just set-up your machine with the pre-requisites and then 
 
 *(coming soon)*
 
+If there is no automatic script for your configuration, please ensure you have all the pre-requisites installed by following the instructions on the websites listed above.
+
 ### Setting up the Development enviornment
 
 First of all you need to fork the main repository, then:
@@ -44,7 +46,7 @@ When you are happy with your changes, please run the tests on the disposable Int
 
 [install-pre-requisites-ubuntu64.sh](install-pre-requisites-ubuntu64.sh) Automatic install for Ubuntu 12.10 64bit
 
-If there is no automatic script for your configuration, please ensure you have all the pre-requisites installed.
+If there is no automatic script for your configuration, please ensure you have all the pre-requisites installed by following the instructions on the websites listed above.
 
 ### Running the tests in the Integration environment
 
