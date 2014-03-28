@@ -5,6 +5,8 @@
 # Version: 0.1.7
 # ----------------------
 
+HELP="Executing $0"
+
 echo "Custom deployment script"
 
 # Helpers
