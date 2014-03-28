@@ -27,14 +27,15 @@ then
 fi
 
 cleanup () {
-	if [ $AZURE_SITE_CREATE_FAILED -eq 1 ]
-	then
-		echo "Deleting the Azure site that failed to create: $SITE_NAME_NOT_RUNNING"
-		azure site delete -q $SITE_NAME_NOT_RUNNING
-	fi
-
     if [ $AZURE_CLI_PRESENT -eq 1 ]
    	then
+
+		if [ $AZURE_SITE_CREATE_FAILED -eq 1 ]
+		then
+			echo "Deleting the Azure site that failed to create: $SITE_NAME_NOT_RUNNING"
+			azure site delete -q $SITE_NAME_NOT_RUNNING
+		fi
+
     	echo "Clearing imported Azure account"
     	azure account clear
     fi
