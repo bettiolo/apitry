@@ -12,11 +12,8 @@ NODE_PORT=${1}
 
 echo "Installing..."
 
-echo "Changing to home"
-cd ~ || die
-
 echo "Setting ENV variables to .bash_profile"
-echo "export port=${NODE_PORT}" >> .bash_profile  || die
+echo "export port=${NODE_PORT}" >> ~/.bash_profile  || die
 
 if [ ! -d "packer-arch/" ]; then
 	echo "Cloning oauth-console"
@@ -31,5 +28,11 @@ git pull || die
 
 echo "Installing npm dependencies"
 npm install || die
+
+echo "Node version"
+node --version || die
+
+echo "Npm version"
+npm --version || die
 
 echo "Finished installing!"
