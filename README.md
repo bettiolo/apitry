@@ -36,6 +36,8 @@ When you are happy with your changes, please run the tests on the disposable Int
 
 ## How to deploy and test the Integration environment?
 
+(work in progress switching to docker)
+
 ### Pre-requisites
 
 - [VirtualBox](http://www.virtualbox.org)
