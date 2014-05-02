@@ -5,3 +5,5 @@ azure.err
 /npm-debug.log
 /packer/*
 /vagrant/.vagrant
+/docker/install-app.sh
+/vagrant/install-app.sh
