@@ -7,6 +7,8 @@ die () {
     exit 1
 }
 
+echo "Creating/updating vagrant box..."
+
 if [ ! -d "packer/" ]; then
 	echo "Creating packer/ folder"
 	mkdir packer/ || die

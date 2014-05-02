@@ -7,6 +7,8 @@ die () {
     exit 1
 }
 
+echo "Starting vagrant box..."
+
 echo "Changing to vagrant/"
 cd vagrant/ || die
 
