@@ -13,6 +13,6 @@ echo "Changing to docker/"
 cd docker/ || die
 
 echo "Starting docker"
-docker run -p 49200:8000 -d "bettiolo/oauth-console" || die
+docker run -t -i -p 49200:8000 "bettiolo/oauth-console" /bin/bash -l || die
 
 echo "Done."
