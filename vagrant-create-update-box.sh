@@ -19,7 +19,7 @@ cd packer/ || die
 
 if [ ! -d "packer-arch/" ]; then
 	echo "Cloning packer-arch"
-	git clone https://github.com/elasticdog/packer-arch.git || die
+	git clone https://github.com/bettiolo/packer-arch.git || die
 fi
 
 echo "Changing to packer-arch/"
