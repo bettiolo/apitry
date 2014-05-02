@@ -2,6 +2,7 @@ apitry
 =============
 
 [![Build Status](https://travis-ci.org/bettiolo/apitry.svg?branch=master)](https://travis-ci.org/bettiolo/apitry)
+[![Build Status](https://drone.io/github.com/bettiolo/apitry/status.png)](https://drone.io/github.com/bettiolo/apitry/latest)
 
 ## How to contribute?
 
