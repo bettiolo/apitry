@@ -1,7 +1,7 @@
-oauth-console
+apitry
 =============
 
-[![Build Status](https://travis-ci.org/bettiolo/oauth-console.svg?branch=master)](https://travis-ci.org/bettiolo/oauth-console)
+[![Build Status](https://travis-ci.org/bettiolo/apitry.svg?branch=master)](https://travis-ci.org/bettiolo/apitry)
 
 ## How to contribute?
 
@@ -24,7 +24,7 @@ If there is no automatic script for your configuration, please ensure you have a
 First of all you need to fork the main repository, then:
 
 ```bash
-git clone https://github.com/{YOUR_USERNAME}/oauth-console.git
+git clone https://github.com/{YOUR_USERNAME}/apitry.git
 cd src
 npm install
 npm test
