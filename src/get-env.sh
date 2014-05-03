@@ -44,12 +44,12 @@ then
 	fi
 fi
 
-if [ "${BRANCH}" = "stable" ]
+if [ "${BRANCH}" = "master" ]
 then
 	echoEnvironment "staging"
 fi
 
-if [ "${BRANCH}" = "master" ]
+if [ "${BRANCH}" = "develop" ]
 then
 	echoEnvironment "development"
 	# echo "integration" if docker/vagrant
