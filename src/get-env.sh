@@ -12,8 +12,12 @@ then
 	VERBOSE=1
 fi
 
-BRANCH=${CI_BRANCH}
-[ -z "${BRANCH}" ] && BRANCH=$(git symbolic-ref -q HEAD | cut -d "/" -f 3)
+# Loading the branch name the standard way
+BRANCH=$(git symbolic-ref -q HEAD | cut -d "/" -f 3)
+# Support for Travis CI
+[ -z "${BRANCH}" ] && BRANCH=${TRAVIS_BRANCH}
+# Support for codeship.io
+[ -z "${BRANCH}" ] && BRANCH=${CI_BRANCH}
 [ -z "${BRANCH}" ] && TAG=$(git describe --exact-match --tags HEAD)
 
 echoEnvironment () {
