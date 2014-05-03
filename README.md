@@ -3,7 +3,7 @@ apitry
 
 [![Build Status](https://travis-ci.org/bettiolo/apitry.svg?branch=master)](https://travis-ci.org/bettiolo/apitry)
 [![Build Status](https://drone.io/github.com/bettiolo/apitry/status.png)](https://drone.io/github.com/bettiolo/apitry/latest)
-
+[![Build Status](https://www.codeship.io/projects/aeca58e0-b483-0131-2b1e-2e00be40f788/status?branch=master)](https://www.codeship.io/projects/20319)
 ## How to contribute?
 
 Contributing is easy! Just set-up your machine with the pre-requisites and then follow the steps to set-up the development environment.
