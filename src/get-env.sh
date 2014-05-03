@@ -13,7 +13,7 @@ then
 fi
 
 BRANCH=${CI_BRANCH}
-[ -z "${BRANCH}" ] && BRANCH=$(git symbolic-ref --short -q HEAD)
+[ -z "${BRANCH}" ] && BRANCH=$(git symbolic-ref -q HEAD | cut -d "/" -f 3)
 [ -z "${BRANCH}" ] && TAG=$(git describe --exact-match --tags HEAD)
 
 echoEnvironment () {
