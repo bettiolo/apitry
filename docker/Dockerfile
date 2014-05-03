@@ -15,7 +15,7 @@ ADD		./install-app.sh /app/
 RUN		chmod +x /app/install-app.sh
 RUN		echo "cd /app" > ~/.bash_login
 RUN		echo "./install-app.sh 8000" >> ~/.bash_login
-RUN		echo "cd oauth-console/src/" >> ~/.bash_login
+RUN		echo "cd apitry/src/" >> ~/.bash_login
 RUN		echo "npm test" >> ~/.bash_login
 
 EXPOSE  8000

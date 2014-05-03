@@ -12,27 +12,25 @@ NODE_PORT=${1}
 
 echo "Installing..."
 
-echo "Setting ENV variables to .bash_profile"
-echo "export port=${NODE_PORT}" >> ~/.bash_profile  || die
-
-if [ ! -d "packer-arch/" ]; then
-	echo "Cloning oauth-console"
-	git clone https://github.com/bettiolo/oauth-console.git || die
-fi
-
-echo "Changing to ./oauth-console"
-cd ./oauth-console/src || die
-
-echo "Pulling latest oauth-console"
-git pull || die
-
-echo "Installing npm dependencies"
-npm install || die
+echo "Cloning repository"
+git clone https://github.com/bettiolo/apitry.git || die
 
 echo "Node version"
 node --version || die
 
 echo "Npm version"
 npm --version || die
+
+echo "Setting ENV variables to .bash_profile"
+echo "export port=${NODE_PORT}" >> ~/.bash_profile  || die
+
+echo "Changing to ./apitry/src"
+cd ./apitry/src || die
+
+# echo "Pulling latest apitry"
+# git pull || die
+
+echo "Installing npm dependencies"
+npm install || die
 
 echo "Finished installing!"

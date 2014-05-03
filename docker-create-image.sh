@@ -18,6 +18,6 @@ echo "Changing to docker/"
 cd docker/ || die
 
 echo "Building docker image"
-docker build -t "bettiolo/oauth-console" . || die
+docker build -t "bettiolo/apitry" . || die
 
 echo "Done."
