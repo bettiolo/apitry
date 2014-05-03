@@ -34,3 +34,9 @@ echo "Installing npm dependencies"
 npm install || die
 
 echo "Finished installing!"
+
+echo "Creating bash login script to run tests"
+echo "cd ./apitry/src/" >> ~/.bash_login
+echo "npm test" >> ~/.bash_login
+
+echo "Created."
