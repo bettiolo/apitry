@@ -10,9 +10,9 @@
     "grunt-contrib-concat": "*"
   },
   "scripts": {
-    "pretest": "grunt build",
+    "pretest": "export NODE_ENV=$(./get-env.sh) && grunt build",
     "test": "grunt test",
-    "prestart": "grunt build",
+    "prestart": "export NODE_ENV=$(./get-env.sh) && grunt build",
     "start": "node src/server.js"
   },
   "repository": {
