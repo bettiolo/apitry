@@ -13,7 +13,7 @@ NODE_PORT=${1}
 echo "Installing..."
 
 echo "Cloning repository"
-git clone https://github.com/bettiolo/apitry.git || die
+git clone --branch develop https://github.com/bettiolo/apitry.git || die
 
 echo "Node version"
 node --version || die
