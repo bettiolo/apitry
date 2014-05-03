@@ -12,13 +12,14 @@ then
 	VERBOSE=1
 fi
 
-# Loading the branch name the standard way
+# Loading the branch name the standard way, does not work if a specific commit has been checked out
 BRANCH=$(git symbolic-ref -q HEAD | cut -d "/" -f 3)
 # Support for Travis CI
 [ -z "${BRANCH}" ] && BRANCH=${TRAVIS_BRANCH}
 # Support for codeship.io
 [ -z "${BRANCH}" ] && BRANCH=${CI_BRANCH}
-[ -z "${BRANCH}" ] && TAG=$(git describe --exact-match --tags HEAD)
+# If a tag has been checked out, the branch will be detached
+[ -z "${BRANCH}" ] && BRANCH=$(git describe --exact-match --tags HEAD)
 
 echoEnvironment () {
 	local env=$1
@@ -26,8 +27,7 @@ echoEnvironment () {
 	if [[ ${VERBOSE} -eq 1 ]]
 	then
 		echo "Environment: ${env}"
-		[ -n "${BRANCH}" ] && echo "Current branch: ${BRANCH}"
-		[ -n "${TAG}" ] && echo "Current tag: ${TAG}"
+		echo "Current branch: ${BRANCH}"
 	else
 		echo "${env}"
 	fi
@@ -35,13 +35,10 @@ echoEnvironment () {
 	exit 0
 }
 
-if [ -z ${BRANCH} ]
+TAG_EXPR='^v[0-9]+\.[0-9]+\.[0-9]+$'
+if [[ "${BRANCH}" =~ ${TAG_EXPR} ]]
 then
-	TAG_EXPR='^v[0-9]+\.[0-9]+\.[0-9]+$'
-	if [[ "${TAG}" =~ ${TAG_EXPR} ]]
-	then
-		echoEnvironment "production"
-	fi
+	echoEnvironment "production"
 fi
 
 if [ "${BRANCH}" = "master" ]
