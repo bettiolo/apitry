@@ -13,7 +13,7 @@ then
 fi
 
 BRANCH=$(git symbolic-ref --short -q HEAD)
-[ -z "${BRANCH}" ] && TAG=$(git describe --exact-match --tags -q HEAD)
+[ -z "${BRANCH}" ] && TAG=$(git describe --exact-match --tags HEAD)
 
 echoEnvironment () {
 	local env=$1
