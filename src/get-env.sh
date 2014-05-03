@@ -13,16 +13,16 @@ then
 fi
 
 BRANCH=$(git symbolic-ref --short -q HEAD)
-TAG=$(git describe --exact-match --tags HEAD)
+[ -z "${BRANCH}" ] && TAG=$(git describe --exact-match --tags -q HEAD)
 
 echoEnvironment () {
 	local env=$1
 	[ -z "${env}" ] && env=unknown
 	if [[ ${VERBOSE} -eq 1 ]]
 	then
-		echo "Current branch: ${BRANCH}"
-		echo "Current tag: ${TAG}"
 		echo "Environment: ${env}"
+		[ -n "${BRANCH}" ] && echo "Current branch: ${BRANCH}"
+		[ -n "${TAG}" ] && echo "Current tag: ${TAG}"
 	else
 		echo "${env}"
 	fi
