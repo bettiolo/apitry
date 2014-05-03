@@ -12,7 +12,7 @@ then
 	VERBOSE=1
 fi
 
-BRANCH=$(CI_BRANCH)
+BRANCH=${CI_BRANCH}
 [ -z "${BRANCH}" ] && BRANCH=$(git symbolic-ref --short -q HEAD)
 [ -z "${BRANCH}" ] && TAG=$(git describe --exact-match --tags HEAD)
 
