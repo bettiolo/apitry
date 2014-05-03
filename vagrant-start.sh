@@ -9,10 +9,8 @@ die () {
 
 echo "Starting vagrant box..."
 
-if [[ ! -f ./vagrant/install-app.sh ]]; then
-	echo "Creating a link to the install script"
-	ln ./install-app.sh ./vagrant/install-app.sh || die
-fi
+echo "Creating a link to the install script"
+ln -f ./install-app.sh ./vagrant/install-app.sh || die
 
 echo "Changing to vagrant/"
 cd vagrant/ || die
