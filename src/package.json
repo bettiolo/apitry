@@ -9,6 +9,10 @@
     "grunt-contrib-clean": "*",
     "grunt-contrib-concat": "*"
   },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
   "scripts": {
     "pretest": "export NODE_ENV=$(./get-env.sh) && grunt build",
     "test": "grunt test",
