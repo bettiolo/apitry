@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 die () {
     local message=$1
@@ -13,6 +13,6 @@ echo "Changing to docker/"
 cd docker/ || die
 
 echo "Starting docker"
-docker run -t -i -p 49200:8000 "bettiolo/oauth-console" /bin/bash -l || die
+docker run -t -i -p 49200:8002 "bettiolo/apitry" || die
 
 echo "Done."

@@ -9,13 +9,9 @@ RUN		apt-get -y install git
 RUN		apt-get -y install nodejs
 RUN		npm update npm -g
 RUN		npm update -g
+RUN		git clone --branch develop https://github.com/bettiolo/apitry.git || die
 
-RUN		mkdir /app
-ADD		./install-app.sh /app/
-RUN		chmod +x /app/install-app.sh
-RUN		echo "cd /app" > ~/.bash_login
-RUN		echo "./install-app.sh 8000" >> ~/.bash_login
-RUN		echo "cd oauth-console/src/" >> ~/.bash_login
-RUN		echo "npm test" >> ~/.bash_login
+ENV		PORT 8002
+EXPOSE  8002
 
-EXPOSE  8000
+CMD		apitry/src/run.sh

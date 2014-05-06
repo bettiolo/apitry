@@ -19,6 +19,9 @@ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1_x86_64.deb || die
 echo "Insalling Vagrant"
 sudo dpkg -i vagrant_1.5.1_x86_64.deb || die
 
+echo "Installing Sahara plugin"
+vagrant plugin install sahara || die
+
 echo "Cleaning up Vagrant installation files"
 rm vagrant_1.5.1_x86_64.deb || die
 

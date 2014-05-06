@@ -1,7 +1,7 @@
 {
-  "name": "oauth-console",
+  "name": "apitry",
   "version": "0.0.1",
-  "description": "OAuth Console",
+  "description": "apitry",
   "main": "server.js",
   "dependencies": {
     "grunt": "*",
@@ -9,15 +9,19 @@
     "grunt-contrib-clean": "*",
     "grunt-contrib-concat": "*"
   },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
   "scripts": {
-    "pretest": "export NODE_ENV=$(./get-env.sh) && grunt build",
+    "pretest": "grunt build",
     "test": "grunt test",
-    "prestart": "export NODE_ENV=$(./get-env.sh) && grunt build",
-    "start": "node src/server.js"
+    "prestart": "grunt build",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bettiolo/oauth-console.git"
+    "url": "https://github.com/bettiolo/apitry.git"
   },
   "keywords": [
     "OAuth"
@@ -25,7 +29,7 @@
   "author": "Marco Bettiolo <marco@bettiolo.it>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bettiolo/oauth-console/issues"
+    "url": "https://github.com/bettiolo/apitry/issues"
   },
-  "homepage": "https://github.com/bettiolo/oauth-console"
+  "homepage": "http://apitry.com"
 }

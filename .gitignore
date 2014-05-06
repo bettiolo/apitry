@@ -7,3 +7,4 @@ azure.err
 /vagrant/.vagrant
 /docker/install-app.sh
 /vagrant/install-app.sh
+src/npm-debug.log

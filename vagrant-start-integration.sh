@@ -7,12 +7,7 @@ die () {
     exit 1
 }
 
-echo "Starting vagrant box..."
-
-if [[ ! -f ./vagrant/install-app.sh ]]; then
-	echo "Creating a link to the install script"
-	ln ./install-app.sh ./vagrant/install-app.sh || die
-fi
+echo "Starting integration environment in vagrant..."
 
 echo "Changing to vagrant/"
 cd vagrant/ || die
@@ -20,10 +15,14 @@ cd vagrant/ || die
 echo "Taking vagrant up"
 vagrant up || die
 
-echo "SSH into vagrant"
-vagrant ssh || die
-
-echo "Destroying vagrant instance"
-vagrant destroy
+echo "Checking sandbox status"
+SANDBOX_STATUS=$(vagrant sandbox status) || die
+if [ "$SANDBOX_STATUS" = "[default] Sandbox mode is off" ]
+then
+	echo "Creating snapshot"
+	vagrant sandbox on
+else
+	echo "Snapshot already created"
+fi
 
 echo "Done."

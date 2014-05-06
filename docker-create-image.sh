@@ -9,15 +9,10 @@ die () {
 
 echo "Creating docker image..."
 
-if [[ ! -f ./docker/install-app.sh ]]; then
-	echo "Creating a link to the install script"
-	ln ./install-app.sh ./docker/install-app.sh || die
-fi
-
 echo "Changing to docker/"
 cd docker/ || die
 
 echo "Building docker image"
-docker build -t "bettiolo/oauth-console" . || die
+docker build -t "bettiolo/apitry" . || die
 
 echo "Done."
