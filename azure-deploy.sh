@@ -37,7 +37,7 @@ cleanup () {
 		fi
 
     	echo "Clearing imported Azure account"
-    	azure account clear
+    	azure account clear -q
     fi
 
     if [ $AZURE_REMOTE_ADDED -eq 1 ]
