@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 die () {
     local message=$1
@@ -20,7 +20,17 @@ npm update -g npm || die
 echo "Updating glbal NPM packages"
 npm update -g || die
 
+echo "Changing to /srv/http/"
+cd /srv/http/ || die
 echo "Cloning development branch"
 git clone --branch develop https://github.com/bettiolo/apitry.git || die
 
-echo "export PORT=8001" >> ~/.bash_profile
+echo "Changing to /srv/http/apitry/src"
+cd ./apitry/src || die
+echo "Installing npm dependencies"
+npm install || die
+echo "Copying apitry service"
+cp apitry.service /etc/systemd/system/ || die
+echo "Enabling apitry service"
+systemctl enable apitry.service || die
+systemctl start apitry.service || die
