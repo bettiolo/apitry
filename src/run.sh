@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 die () {
     local message=$1
@@ -24,12 +24,7 @@ git pull || die
 echo "Installing npm dependencies"
 npm install || die
 
-echo "Finished installing!"
-
 echo "Running tests"
 npm test || die
-
-echo "Running app..."
-npm start || die
 
 echo "Done."
