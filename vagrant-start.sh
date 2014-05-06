@@ -26,7 +26,7 @@ else
 fi
 
 echo "SSH into vagrant"
-vagrant ssh -c apitry/src/run.sh || die
+vagrant ssh -c /srv/http/apitry/src/run.sh || die
 
 echo "Rolling back changes"
 vagrant sandbox rollback
