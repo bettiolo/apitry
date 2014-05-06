@@ -12,8 +12,8 @@ NODE_PORT=${1}
 
 echo "Running app..."
 
-echo "Cloning repository"
-git clone --branch develop https://github.com/bettiolo/apitry.git || die
+echo "Git version"
+git --version || die
 
 echo "Node version"
 node --version || die
@@ -21,22 +21,21 @@ node --version || die
 echo "Npm version"
 npm --version || die
 
+echo "Updating from git"
+git pull || die
+
 echo "Setting ENV variables to .bash_profile"
 echo "export port=${NODE_PORT}" >> ~/.bash_profile  || die
-
-echo "Changing to ./apitry/src"
-cd ./apitry/src || die
-
-# echo "Pulling latest apitry"
-# git pull || die
 
 echo "Installing npm dependencies"
 npm install || die
 
 echo "Finished installing!"
 
-echo "Creating bash login script to run tests"
-echo "cd ./apitry/src/" >> ~/.bash_login
-echo "npm test" >> ~/.bash_login
+echo "Running tests"
+npm test || die
 
-echo "Created."
+echo "Running app..."
+npm start || die
+
+echo "Done."
