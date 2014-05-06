@@ -14,9 +14,9 @@
     "npm": "*"
   },
   "scripts": {
-    "pretest": "export NODE_ENV=$(./get-env.sh) && grunt build",
+    "pretest": "grunt build",
     "test": "grunt test",
-    "prestart": "export NODE_ENV=$(./get-env.sh) && grunt build",
+    "prestart": "grunt build",
     "start": "node server.js"
   },
   "repository": {
