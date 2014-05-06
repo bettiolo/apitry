@@ -7,7 +7,7 @@ die () {
     exit 1
 }
 
-echo "Starting vagrant box..."
+echo "Starting integration environment in vagrant..."
 
 echo "Changing to vagrant/"
 cd vagrant/ || die
@@ -24,17 +24,5 @@ then
 else
 	echo "Snapshot already created"
 fi
-
-echo "SSH into vagrant"
-vagrant ssh -c /srv/http/apitry/src/run.sh || die
-
-echo "Rolling back changes"
-vagrant sandbox rollback
-
-#echo "Suspending vagrant"
-#vagrant suspend || die
-
-#echo "Stopping vagrant"
-#vagrant halt || die
 
 echo "Done."
