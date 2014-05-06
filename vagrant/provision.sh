@@ -35,4 +35,5 @@ echo "Copying apitry service"
 cp apitry.service /etc/systemd/system/ || die
 echo "Enabling apitry service"
 systemctl enable apitry.service || die
+echo "Starting apitry service"
 systemctl start apitry.service || die
