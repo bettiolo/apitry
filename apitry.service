@@ -5,7 +5,8 @@ After=syslog.target
 After=network.target
 
 [Service]
-ExecStart=/srv/http/apitry/src/npm start
+ExecStart=/usr/bin/npm start
+WorkingDirectory=/srv/http/apitry/src
 # Type=forking
 # User=nobody
 # Group=nobody
@@ -15,7 +16,7 @@ StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=apitry
 Environment=PORT=8001
-Environment=NODE_ENV=production
+# Environment=NODE_ENV=production
 
 [Install]
 WantedBy=multi-user.target
