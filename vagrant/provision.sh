@@ -29,6 +29,8 @@ echo "Changing to /srv/http/apitry/src"
 cd ./apitry/src || die
 echo "Installing npm dependencies"
 npm install || die
+echo "Changing to /srv/http/apitry"
+cd .. || die
 echo "Copying apitry service"
 cp apitry.service /etc/systemd/system/ || die
 echo "Enabling apitry service"
