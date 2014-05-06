@@ -22,19 +22,19 @@ echo "Changing to /srv/http/apitry"
 cd /srv/http/apitry/
 
 echo "Stopping apitry service"
-systemctl stop apitry.service || die
+sudo systemctl stop apitry.service || die
 
 echo "Updating from git"
-git pull || die
+sudo git pull || die
 
 echo "Changing to /srv/http/apitry/src"
 cd ./src/ || die
 
 echo "Installing npm dependencies"
-npm install || die
+sudo npm install || die
 
 echo "Start apitry service"
-systemctl start apitry.service || die
+sudo systemctl start apitry.service || die
 
 echo "Running tests"
 npm test || die
