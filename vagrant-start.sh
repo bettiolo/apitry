@@ -9,19 +9,26 @@ die () {
 
 echo "Starting vagrant box..."
 
-echo "Creating a link to the install script"
-ln -f ./install-app.sh ./vagrant/install-app.sh || die
-
 echo "Changing to vagrant/"
 cd vagrant/ || die
 
 echo "Taking vagrant up"
 vagrant up || die
 
+echo "Checking sandbox status"
+SANDBOX_STATUS=$(vagrant sandbox status) || die
+if [ "$SANDBOX_STATUS" = "[default] Sandbox mode is off" ]
+then
+	echo "Creating snapshot"
+	vagrant sandbox on
+else
+	echo "Snapshot already created"
+fi
+
 echo "SSH into vagrant"
 vagrant ssh || die
 
-echo "Destroying vagrant instance"
-vagrant destroy
+echo "Rolling back changes"
+vagrant sandbox rollback
 
 echo "Done."

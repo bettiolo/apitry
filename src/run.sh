@@ -10,7 +10,7 @@ die () {
 : ${1?"Usage: $0 <node-port>"}
 NODE_PORT=${1}
 
-echo "Installing..."
+echo "Running app..."
 
 echo "Cloning repository"
 git clone --branch develop https://github.com/bettiolo/apitry.git || die
