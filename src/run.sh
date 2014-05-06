@@ -7,9 +7,6 @@ die () {
     exit 1
 }
 
-: ${1?"Usage: $0 <node-port>"}
-NODE_PORT=${1}
-
 echo "Running app..."
 
 echo "Git version"
@@ -23,9 +20,6 @@ npm --version || die
 
 echo "Updating from git"
 git pull || die
-
-echo "Setting ENV variables to .bash_profile"
-echo "export port=${NODE_PORT}" >> ~/.bash_profile  || die
 
 echo "Installing npm dependencies"
 npm install || die

@@ -22,3 +22,5 @@ npm update -g || die
 
 echo "Cloning development branch"
 git clone --branch develop https://github.com/bettiolo/apitry.git || die
+
+echo "export PORT=8001" >> ~/.bash_profile

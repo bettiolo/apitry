@@ -11,6 +11,7 @@ RUN		npm update npm -g
 RUN		npm update -g
 RUN		git clone --branch develop https://github.com/bettiolo/apitry.git || die
 
+ENV		PORT=8002
 EXPOSE  8002
 
 CMD		apitry/src/run.sh 8002
