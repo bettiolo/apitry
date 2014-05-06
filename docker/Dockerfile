@@ -9,8 +9,8 @@ RUN		apt-get -y install git
 RUN		apt-get -y install nodejs
 RUN		npm update npm -g
 RUN		npm update -g
+RUN		git clone --branch develop https://github.com/bettiolo/apitry.git || die
 
-ADD		./install-app.sh
-RUN		./install-app.sh 8000
+EXPOSE  8002
 
-EXPOSE  8000
+CMD		apitry/src/run.sh 8002
