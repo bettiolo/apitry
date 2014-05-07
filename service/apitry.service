@@ -15,8 +15,7 @@ Restart=always
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=apitry
-Environment=PORT=8001
-# Environment=NODE_ENV=production
+EnvironmentFile=/srv/http/apitry/service/environment
 
 [Install]
 WantedBy=multi-user.target

@@ -29,10 +29,13 @@ echo "Changing to /srv/http/apitry/src"
 cd ./apitry/src || die
 echo "Installing npm dependencies"
 npm install || die
-echo "Changing to /srv/http/apitry"
-cd .. || die
+
+echo "Changing to /srv/http/apitry/service"
+cd ../service || die
+echo "Setting systemd environment variables"
+echo "APITRY_ENV=$(./get-env.sh)" >> ./environment || die
 echo "Copying apitry service"
-cp apitry.service /etc/systemd/system/ || die
+cp ./apitry.service /etc/systemd/system/ || die
 echo "Enabling apitry service"
 systemctl enable apitry.service || die
 echo "Starting apitry service"
