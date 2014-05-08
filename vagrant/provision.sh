@@ -23,17 +23,23 @@ npm update -g || die
 echo "Changing to /srv/http/"
 cd /srv/http/ || die
 echo "Cloning development branch"
-git clone --branch develop https://github.com/bettiolo/apitry.git || die
+git clone --branch develop https://github.com/bettiolo/apitry.git --depth 1 || die
 
-echo "Changing to /srv/http/apitry/src"
-cd ./apitry/src || die
+echo "Changing to /srv/http/apitry/"
+cd ./apitry || die
+echo "Loading environment"
+./get-env.sh -v || die
+APITRY_ENV=$(./get-env.sh)
+
+echo "Changing to /srv/http/apitry/src/"
+cd ./src || die
 echo "Installing npm dependencies"
 npm install || die
 
-echo "Changing to /srv/http/apitry/service"
+echo "Changing to /srv/http/apitry/service/"
 cd ../service || die
-echo "Setting systemd environment variables"
-echo "APITRY_ENV=$(./get-env.sh)" >> ./environment || die
+echo "Setting environment for service"
+echo "APITRY_ENV=${APITRY_ENV}" >> ./environment || die
 echo "Copying apitry service"
 cp ./apitry.service /etc/systemd/system/ || die
 echo "Enabling apitry service"
