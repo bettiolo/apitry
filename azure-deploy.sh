@@ -153,6 +153,9 @@ REMOTE_URL="https://$SITE_USERNAME:$SITE_PASSWORD@$(git ls-remote --get-url azur
 echo "Changing 'azure' remote url to: $REMOTE_URL" | sed "s/$SITE_PASSWORD/[...]/g" 
 git remote set-url azure "$REMOTE_URL" || die
 
+echo "Setting Azure environment variables"
+azure site appsetting add APITRY_ENV=$(./get-env.sh) $SITE_NAME_NOT_RUNNING || die
+
 echo "Pushing to 'azure' remote"
 GIT_PUSH_OUTPUT=$(git push azure master 2>&1) || die
 echo "$GIT_PUSH_OUTPUT" | sed "s/$SITE_PASSWORD/[...]/g"
