@@ -1,11 +1,13 @@
 var http = require('http');
 var os = require('os')
 var port = process.env.PORT || process.env.port || 8000;
-var env = process.env.NODE_ENV || 'unknown';
+var nodeEnv = process.env.NODE_ENV || 'unknown';
+var apitryEnv = process.env.APITRY_ENV || 'unknown';
 var server = http.createServer(function (req, res) {
 	res.writeHead(200, {'Content-Type': 'text/plain'});
 	res.write('Hello World\n');
-	res.write('Env: ' + env + '\n');
+	res.write('Environment: ' + apitryEnv + '\n');
+	res.write('Production Mode: ' + (nodeEnv == 'production' ? 'yes' : 'no') + '\n');
 	res.write('Host: ' + os.hostname() + '\n');
 	res.write('OS Type: ' + os.type() + '\n');
 	res.write('OS Platform: ' + os.platform() + '\n');
