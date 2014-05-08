@@ -156,8 +156,9 @@ git remote set-url azure "$REMOTE_URL" || die
 echo "Setting Azure environment variables"
 azure site appsetting add APITRY_ENV=$(./get-env.sh) $SITE_NAME_NOT_RUNNING || die
 
-echo "Pushing to 'azure' remote"
-GIT_PUSH_OUTPUT=$(git push azure master 2>&1) || die
+BRANCH=$(./get-branch.sh)
+echo "Pushing branch '${BRANCH}' to 'azure' remote"
+GIT_PUSH_OUTPUT=$(git push azure ${BRANCH} || die
 echo "$GIT_PUSH_OUTPUT" | sed "s/$SITE_PASSWORD/[...]/g"
 
 AZURE_SITE_CREATE_FAILED=0

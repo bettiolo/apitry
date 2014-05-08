@@ -12,14 +12,7 @@ then
 	VERBOSE=1
 fi
 
-# Loading the branch name the standard way, does not work if a specific commit has been checked out
-BRANCH=$(git symbolic-ref -q HEAD | cut -d "/" -f 3)
-# Support for Travis CI
-[ -z "${BRANCH}" ] && BRANCH=${TRAVIS_BRANCH}
-# Support for codeship.io
-[ -z "${BRANCH}" ] && BRANCH=${CI_BRANCH}
-# If a tag has been checked out, the branch will be detached
-[ -z "${BRANCH}" ] && BRANCH=$(git describe --exact-match --tags HEAD)
+BRANCH=$(./get-branch.sh)
 
 echoEnvironment () {
 	local env=$1
