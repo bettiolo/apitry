@@ -161,7 +161,7 @@ BRANCH=$(./get-branch.sh)
 # azure site repository branch ${BRANCH} $SITE_NAME_NOT_RUNNING || die
 
 echo "Pushing branch '${BRANCH}' to 'azure' remote"
-GIT_PUSH_OUTPUT=$(git push azure ${BRANCH}:masterr) || die
+GIT_PUSH_OUTPUT=$(git push azure ${BRANCH}:master) || die
 echo "$GIT_PUSH_OUTPUT" | sed "s/$SITE_PASSWORD/[...]/g"
 
 AZURE_SITE_CREATE_FAILED=0
