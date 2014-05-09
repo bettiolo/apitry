@@ -19,7 +19,9 @@ var server = http.createServer(function (req, res) {
 	res.write('OS CPU count: ' + os.cpus().length + '\n');
 	res.write('OS CPU model: ' + os.cpus()[0].model + '\n');
 	res.write('OS CPU speed: ' + os.cpus()[0].speed + 'mhz\n');
+	res.write('Headers:\n');
+	res.write(JSON.stringify(req.headers, null, 2) + '\n');
 	res.end('\n');
-})
+});
 server.listen(port);
 console.log('Server running on port ' + port);
